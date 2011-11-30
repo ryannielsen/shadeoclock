@@ -25,28 +25,38 @@
 		[[self layer] setNeedsDisplayOnBoundsChange:YES];
 		[[self layer] setFrame:NSRectToCGRect(self.bounds)];
 		[self setWantsLayer:YES];
-		
-		[self setFrameLines:[NSBezierPath bezierPath]];
-		[[self frameLines] moveToPoint:NSMakePoint(round([self bounds].size.width / 4.0), round([self bounds].size.height / 2.0) - 1.0)];
-		[[self frameLines] lineToPoint:NSMakePoint(3.0 * round([self bounds].size.width / 4.0), round([self bounds].size.height / 2.0) - 1.0)];
-		[[self frameLines] appendBezierPathWithRect:NSInsetRect([self bounds], 6.0, 6.0)];
-		[[self frameLines] setLineWidth:1.0];
-		NSAffineTransform *transform = [NSAffineTransform transform];
-		[transform translateXBy:0.5 yBy:0.5];
-		[[self frameLines] transformUsingAffineTransform:transform];
-		
-		NSMutableParagraphStyle *centeredStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-		[centeredStyle setAlignment:NSCenterTextAlignment];
-		[self setStringAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-								   [NSFont fontWithName:@"Helvetica" size:160], NSFontAttributeName,
-								   [[NSColor whiteColor] colorWithAlphaComponent:0.9], NSForegroundColorAttributeName,
-								   [NSNumber numberWithFloat:-0.5], NSStrokeWidthAttributeName,
-								   [[NSColor blackColor] colorWithAlphaComponent:0.2], NSStrokeColorAttributeName,
-								   centeredStyle, NSParagraphStyleAttributeName,
-								   nil]];
-		[centeredStyle release];
     }
     return self;
+}
+
+- (void)startAnimation
+{
+    [super startAnimation];
+
+	[self setFrameLines:[NSBezierPath bezierPath]];
+	[[self frameLines] moveToPoint:NSMakePoint(round([self bounds].size.width / 4.0), round([self bounds].size.height / 2.0) - 1.0)];
+	[[self frameLines] lineToPoint:NSMakePoint(3.0 * round([self bounds].size.width / 4.0), round([self bounds].size.height / 2.0) - 1.0)];
+	[[self frameLines] appendBezierPathWithRect:NSInsetRect([self bounds], 6.0, 6.0)];
+	[[self frameLines] setLineWidth:1.0];
+	NSAffineTransform *transform = [NSAffineTransform transform];
+	[transform translateXBy:0.5 yBy:0.5];
+	[[self frameLines] transformUsingAffineTransform:transform];
+	
+	NSMutableParagraphStyle *centeredStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	[centeredStyle setAlignment:NSCenterTextAlignment];
+	[self setStringAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+							   [NSFont fontWithName:@"Helvetica" size:160], NSFontAttributeName,
+							   [[NSColor whiteColor] colorWithAlphaComponent:0.9], NSForegroundColorAttributeName,
+							   [NSNumber numberWithFloat:-0.5], NSStrokeWidthAttributeName,
+							   [[NSColor blackColor] colorWithAlphaComponent:0.2], NSStrokeColorAttributeName,
+							   centeredStyle, NSParagraphStyleAttributeName,
+							   nil]];
+	[centeredStyle release];
+}
+
+- (void)stopAnimation
+{
+    [super stopAnimation];
 }
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
@@ -62,16 +72,16 @@
 	int blue = round(255 * (now->tm_sec / 59.0));
 
 	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
-	animation.fromValue = (id)[layer backgroundColor];
-	animation.toValue = (__bridge_transfer id)CGColorCreateGenericRGB((red / 255.0), (green / 255.0), (blue / 255.0), 1.0);
-	animation.duration = 1.0;
+	[animation setFromValue:(id)[layer backgroundColor]];
+	[animation setToValue:(__bridge_transfer id)CGColorCreateGenericRGB((red / 255.0), (green / 255.0), (blue / 255.0), 1.0)];
+	[animation setDuration:1.0];
 	[layer setBackgroundColor:CGColorCreateGenericRGB((red / 255.0), (green / 255.0), (blue / 255.0), 1.0)];
 	[layer addAnimation:animation forKey:@"backgroundColor"];
 	
-	NSAttributedString *hex = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%02X%02X%02X", red, green, blue] attributes:self.stringAttributes] autorelease];
+	NSAttributedString *hex = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%02X%02X%02X", red, green, blue] attributes:[self stringAttributes]] autorelease];
 	NSRect hexRect = [hex boundingRectWithSize:NSZeroSize options:0];
 	
-	NSAttributedString *time = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%02i:%02i:%02i", now->tm_hour, now->tm_min, now->tm_sec] attributes:self.stringAttributes] autorelease];
+	NSAttributedString *time = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%02i:%02i:%02i", now->tm_hour, now->tm_min, now->tm_sec] attributes:[self stringAttributes]] autorelease];
 	NSRect timeRect = [time boundingRectWithSize:NSZeroSize options:0];
 	
 	[hex drawInRect:NSMakeRect(0.5, round(([self bounds].size.height / 2.0) - hexRect.size.height) + 0.5, [self bounds].size.width, hexRect.size.height)];
@@ -85,6 +95,7 @@
 - (void)animateOneFrame
 {
 	[[self layer] setNeedsDisplay];
+    return;
 }
 
 - (BOOL)hasConfigureSheet
