@@ -7,12 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		949A288D13D6996A005D9954 /* Shadeoclock.saver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94B1756413D16EC800B44664 /* Shadeoclock.saver */; };
 		94B1756813D16EC800B44664 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B1756713D16EC800B44664 /* Cocoa.framework */; };
 		94B1756A13D16EC800B44664 /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B1756913D16EC800B44664 /* ScreenSaver.framework */; };
 		94B1757413D16EC800B44664 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94B1757213D16EC800B44664 /* InfoPlist.strings */; };
 		94B1757713D16EC800B44664 /* ShadeoclockView.h in Headers */ = {isa = PBXBuildFile; fileRef = 94B1757613D16EC800B44664 /* ShadeoclockView.h */; };
 		94B1757913D16EC800B44664 /* ShadeoclockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B1757813D16EC800B44664 /* ShadeoclockView.m */; };
+		94F6E7311484AD170038531A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F6E7301484AD170038531A /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		949A288C13D698E2005D9954 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "$(HOME)/Library/Screen Savers/";
+			dstSubfolderSpec = 0;
+			files = (
+				949A288D13D6996A005D9954 /* Shadeoclock.saver in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		94B1756413D16EC800B44664 /* Shadeoclock.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Shadeoclock.saver; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -21,11 +36,12 @@
 		94B1756C13D16EC800B44664 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		94B1756D13D16EC800B44664 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		94B1756E13D16EC800B44664 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		94B1757113D16EC800B44664 /* Shadeoclock-Info.plist */ = {isa = PBXFileReference; path = "Shadeoclock-Info.plist"; sourceTree = "<group>"; };
+		94B1757113D16EC800B44664 /* Shadeoclock-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Shadeoclock-Info.plist"; sourceTree = "<group>"; };
 		94B1757313D16EC800B44664 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		94B1757513D16EC800B44664 /* Shadeoclock-Prefix.pch */ = {isa = PBXFileReference; path = "Shadeoclock-Prefix.pch"; sourceTree = "<group>"; };
+		94B1757513D16EC800B44664 /* Shadeoclock-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shadeoclock-Prefix.pch"; sourceTree = "<group>"; };
 		94B1757613D16EC800B44664 /* ShadeoclockView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadeoclockView.h; sourceTree = "<group>"; };
 		94B1757813D16EC800B44664 /* ShadeoclockView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShadeoclockView.m; sourceTree = "<group>"; };
+		94F6E7301484AD170038531A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = ../../../../System/Library/Frameworks/QuartzCore.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +51,7 @@
 			files = (
 				94B1756813D16EC800B44664 /* Cocoa.framework in Frameworks */,
 				94B1756A13D16EC800B44664 /* ScreenSaver.framework in Frameworks */,
+				94F6E7311484AD170038531A /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +78,7 @@
 		94B1756613D16EC800B44664 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94F6E7301484AD170038531A /* QuartzCore.framework */,
 				94B1756713D16EC800B44664 /* Cocoa.framework */,
 				94B1756913D16EC800B44664 /* ScreenSaver.framework */,
 				94B1756B13D16EC800B44664 /* Other Frameworks */,
@@ -121,6 +139,7 @@
 				94B1756013D16EC800B44664 /* Headers */,
 				94B1756113D16EC800B44664 /* Resources */,
 				94B1756213D16EC800B44664 /* Rez */,
+				949A288C13D698E2005D9954 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -137,6 +156,7 @@
 		94B1755913D16EC800B44664 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Tumult Inc.";
 			};
 			buildConfigurationList = 94B1755C13D16EC800B44664 /* Build configuration list for PBXProject "Shadeoclock" */;
@@ -218,8 +238,17 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
@@ -239,8 +268,17 @@
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
@@ -290,6 +328,7 @@
 				94B1757E13D16EC800B44664 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
