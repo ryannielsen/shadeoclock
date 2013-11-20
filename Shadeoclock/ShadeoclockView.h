@@ -9,7 +9,5 @@
 #import <ScreenSaver/ScreenSaver.h>
 
 @interface ShadeoclockView : ScreenSaverView
-@property (retain) NSBezierPath *frameLines;
-@property (retain) NSDictionary *stringAttributes;
 
 @end
