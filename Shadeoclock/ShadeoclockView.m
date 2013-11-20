@@ -38,13 +38,12 @@
 		NSMutableParagraphStyle *centeredStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 		[centeredStyle setAlignment:NSCenterTextAlignment];
 		[self setStringAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-								   [NSFont fontWithName:@"Helvetica" size:160], NSFontAttributeName,
+								   [NSFont fontWithName:@"Helvetica Neue" size:160], NSFontAttributeName,
 								   [[NSColor whiteColor] colorWithAlphaComponent:0.9], NSForegroundColorAttributeName,
 								   [NSNumber numberWithFloat:-0.5], NSStrokeWidthAttributeName,
 								   [[NSColor blackColor] colorWithAlphaComponent:0.2], NSStrokeColorAttributeName,
 								   centeredStyle, NSParagraphStyleAttributeName,
 								   nil]];
-		[centeredStyle release];
     }
     return self;
 }
@@ -62,16 +61,19 @@
 	int blue = round(255 * (now->tm_sec / 59.0));
 
 	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
-	[animation setFromValue:(id)[layer backgroundColor]];
-	[animation setToValue:(__bridge_transfer id)CGColorCreateGenericRGB((red / 255.0), (green / 255.0), (blue / 255.0), 1.0)];
+	[animation setFromValue:(NSColor *)[layer backgroundColor]];
+	CGColorRef color = CGColorCreateGenericRGB((red / 255.0), (green / 255.0), (blue / 255.0), 1.0);
+    [animation setToValue:CFBridgingRelease(color)];
 	[animation setDuration:1.0];
-	[layer setBackgroundColor:CGColorCreateGenericRGB((red / 255.0), (green / 255.0), (blue / 255.0), 1.0)];
+    color = CGColorCreateGenericRGB((red / 255.0), (green / 255.0), (blue / 255.0), 1.0);
+	[layer setBackgroundColor:color];
+    CFRelease(color);
 	[layer addAnimation:animation forKey:@"backgroundColor"];
 	
-	NSAttributedString *hex = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%02X%02X%02X", red, green, blue] attributes:[self stringAttributes]] autorelease];
+	NSAttributedString *hex = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%02X%02X%02X", red, green, blue] attributes:[self stringAttributes]];
 	NSRect hexRect = [hex boundingRectWithSize:NSZeroSize options:0];
 	
-	NSAttributedString *time = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%02i:%02i:%02i", now->tm_hour, now->tm_min, now->tm_sec] attributes:[self stringAttributes]] autorelease];
+	NSAttributedString *time = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%02i:%02i:%02i", now->tm_hour, now->tm_min, now->tm_sec] attributes:[self stringAttributes]];
 	NSRect timeRect = [time boundingRectWithSize:NSZeroSize options:0];
 	
 	[hex drawInRect:NSMakeRect(0.5, round(([self bounds].size.height / 2.0) - hexRect.size.height) + 0.5, [self bounds].size.width, hexRect.size.height)];
